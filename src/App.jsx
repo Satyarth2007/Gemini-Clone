@@ -1,10 +1,16 @@
 import React from 'react'
+import Sidebar from './components/Sidebar'
+import MainComponent from './components/MainComponent'
 
 const App = () => {
+
   return (
-    <div className='text-red-700 text-3xl'>
-      App
-    </div>
+   <>
+   <div className='flex'>
+    <Sidebar/>
+   <MainComponent />
+   </div>
+   </>
   )
 }
 
