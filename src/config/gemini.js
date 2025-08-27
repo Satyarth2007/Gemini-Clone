@@ -1,53 +1,40 @@
-// To run this code you need to install the following dependencies:
-// npm install @google/genai mime
-// npm install -D @types/node
 
-import {
-  GoogleGenAI,
-} from '@google/genai';
+// Make sure to install the SDK: npm install @google/generative-ai
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
+// --- IMPORTANT SECURITY NOTE ---
+// For production, DO NOT hardcode your API key here.
+// Use environment variables or a secure secrets management system.
+// Example for Node.js: const API_KEY = process.env.GEMINI_API_KEY;
+// If using a .env file, you might need a package like 'dotenv'.
+// npm install dotenv
+// require('dotenv').config(); // At the top of your file
+// --------------------------------
+
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY; // Replace with your actual API key
 
 async function main(prompt) {
-  const ai = new GoogleGenAI({
-    apiKey: process.env.VITE_GEMINI_API_KEY,
-  });
-  const tools = [
-    {
-      googleSearch: {
-      }
-    },
-  ];
-  const config = {
-    thinkingConfig: {
-      thinkingBudget: 0,
-    },
-    tools,
-  };
-  const model = 'gemini-2.5-flash-lite';
-  const contents = [
-    {
-      role: 'user',
-      parts: [
-        {
-          text: `prompt`,
-        },
-      ],
-    },
-  ];
+  // Initialize the Gemini API client
+  const genAI = new GoogleGenerativeAI(API_KEY);
 
-//   const response = await ai.models.generateContentStream({
-//     model,
-//     config,
-//     contents,
-//   });
+  // Select the model you want to use (e.g., "gemini-pro", "gemini-1.5-flash")
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-const  response = result.response.text()
-console.log(result.response.text());
+  //  prompt = "Who is Steve Smith";
+  // prompt = prompt
 
-  let fileIndex = 0;
-  for await (const chunk of response) {
-    console.log(chunk.text);
+  try {
+    // Generate content based on the prompt
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text(); // Get the text content from the response
+
+    console.log("Gemini API Response:");
+    console.log(text);
+  } catch (error) {
+    console.error("Error calling Gemini API:", error);
   }
 }
 
+// Call the function to run the Gemini API integration
 export default main;
