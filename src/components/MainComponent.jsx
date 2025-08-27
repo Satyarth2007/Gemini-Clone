@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaUserCircle, FaCompass, FaLightbulb, FaMicrophone } from "react-icons/fa";
 import { FaCode, FaMessage } from 'react-icons/fa6';
 import { IoSend } from 'react-icons/io5';
 import { MdAddPhotoAlternate } from "react-icons/md";
+import { Context } from '../context/Context';
 
 
 
 const MainComponent = () => {
+    const {
+        input,
+        setInput,
+        recentPrompt,
+        setRecentPrompt,
+        prevPrompt,
+        setPrevPrompt,
+        showResult,
+        loading,
+        resultData,
+        onSent,
+    } = useContext(Context)
+
     return (
         <div className='flex-1 min-h-screen pb-[15vh] relative'>
             <div className="flex items-center justify-between text-2xl p-5 text-slate-700">
@@ -52,11 +66,19 @@ const MainComponent = () => {
 
                 <div className="absolute bottom-0 w-full max-w-[900px] px-5 mx-auto mt-5">
                     <div className="flex items-center justify-between gap-20 bg-gray-200 py-2 px-5 rounded-full">
-                        <input type="text" placeholder='Enter a prompt here...' className='flex-1 bg-transparent border-none outline-none p-2 text-lg' />
+                        <input
+                            type="text" placeholder='Enter a prompt here...'
+                            className='flex-1 bg-transparent border-none outline-none p-2 text-lg'
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                        />
                         <div className="flex gap-4 items-center">
                             <MdAddPhotoAlternate className='text-2xl cursor-pointer' />
                             <FaMicrophone className='text-2xl cursor-pointer' />
-                            <IoSend className='text-2xl cursor-pointer' />
+                            <IoSend
+                                onClick={() => onSent(input)}
+                                className='text-2xl cursor-pointer'
+                            />
                         </div>
                     </div>
 
