@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { FaUserCircle, FaCompass, FaLightbulb, FaMicrophone } from "react-icons/fa";
-import { FaCode, FaMessage } from 'react-icons/fa6';
+import { FaCircleUser, FaCode, FaMessage } from 'react-icons/fa6';
 import { IoSend } from 'react-icons/io5';
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { Context } from '../context/Context';
@@ -29,6 +29,9 @@ const MainComponent = () => {
 
             </div>
             <div className="max-w-[900px] mx-auto">
+
+                {!showResult ? 
+                <>
                 <div className="my-12 text-[56px] text-slate-500 font-semibold p-5">
                     <p><span className=' bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent '>Hello, Satyarth.</span></p>
                     <p className='text-slate-400'>How can I  help you today?</p>
@@ -63,6 +66,21 @@ const MainComponent = () => {
                     </div>
 
                 </div>
+                </> : <div className='py-0 px-[5%] max-h-[70vh] overflow-y-scroll scrollbar-hide'> 
+                    <div className="my-10 mx-0 flex items-center gap-5">
+                        <FaCircleUser className='text-3xl'/>
+                        <p>{recentPrompt}</p>
+                    </div>
+
+                    <div className="flex items-start  gap-5">
+                        <img src="/public/gemini-icon.png" className='w-[2rem] rounded-[50%]' />
+
+                        <p>{resultData}</p>
+                    </div>
+                    
+                    </div>}
+
+                
 
                 <div className="absolute bottom-0 w-full max-w-[900px] px-5 mx-auto mt-5">
                     <div className="flex items-center justify-between gap-20 bg-gray-200 py-2 px-5 rounded-full">

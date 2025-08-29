@@ -31,6 +31,9 @@ async function main(prompt) {
 
     console.log("Gemini API Response:");
     console.log(text);
+
+    return response
+
   } catch (error) {
     console.error("Error calling Gemini API:", error);
   }
