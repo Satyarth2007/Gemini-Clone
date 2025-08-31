@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --animate-fade-in-scale: fade-in-scale 5s linear infinite;
+  @keyframes fade-in-scale {
+  0% {
+      background-position: -800px 0px
+    }
+    100% {
+      background-position: 800px 0px
+    }
+  }
+}
+
 /* Hide scrollbar from Chrome,Safari and Opera */
 
 @layer utilities {
@@ -12,3 +24,5 @@
     display: none;             /* Chrome, Safari, Opera */
   }
 }
+
+

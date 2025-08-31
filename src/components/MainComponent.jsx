@@ -69,13 +69,21 @@ const MainComponent = () => {
                 </> : <div className='py-0 px-[5%] max-h-[70vh] overflow-y-scroll scrollbar-hide'> 
                     <div className="my-10 mx-0 flex items-center gap-5">
                         <FaCircleUser className='text-3xl'/>
-                        <p>{recentPrompt}</p>
+                        <p className='text-lg font-[400] leading-[1.8]'>{recentPrompt}</p>
                     </div>
 
                     <div className="flex items-start  gap-5">
-                        <img src="/public/gemini-icon.png" className='w-[2rem] rounded-[50%]' />
+                        <img src="/gemini-icon.png" className='w-[2rem] rounded-[50%]' />
 
-                        <p>{resultData}</p>
+                        {
+                            loading ? (<div className='w-full flex flex-col gap-2'>
+                                <hr className='rounded-md border-none bg-gray-200 bg-gradient-to-r from-[#81cafe] via-[#ffffff] to-[#81cafe] p-4 animate-fade-in-scale' />
+                                <hr className='rounded-md border-none bg-gray-200 bg-gradient-to-r from-[#81cafe] via-[#ffffff] to-[#81cafe] p-4 animate-fade-in-scale' />
+                                <hr className='rounded-md border-none bg-gray-200 bg-gradient-to-r from-[#81cafe] via-[#ffffff] to-[#81cafe] p-4 animate-fade-in-scale' />
+                            </div>) : <p dangerouslySetInnerHTML={{__html:resultData}} className='text-lg font-[400] leading-[1.8]'></p>
+                        }
+
+                        
                     </div>
                     
                     </div>}
@@ -94,7 +102,7 @@ const MainComponent = () => {
                             <MdAddPhotoAlternate className='text-2xl cursor-pointer' />
                             <FaMicrophone className='text-2xl cursor-pointer' />
                             <IoSend
-                                onClick={() => onSent(input)}
+                                onClick={() => onSent()}
                                 className='text-2xl cursor-pointer'
                             />
                         </div>
